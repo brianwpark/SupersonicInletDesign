@@ -13,3 +13,7 @@ P_sea = 101325; % Pa
 m_dot = 63.6; % kg/s
 
 %lift off calculation
+%speed of sound calculation
+%Velocity calculation
+%density calculation
+%Area calculation
