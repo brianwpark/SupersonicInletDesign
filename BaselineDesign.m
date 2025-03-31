@@ -26,7 +26,8 @@ rho = P_sea/(R_Specific*T_sea); % kg/m^3
 %Area calculation
 A = m_dot/(rho*v); % m^2
 %Height and Width calculation
-
+S = sqrt(A/2.5); % m
+H1 = 2.5*S; % m
 
 %Horiznotal Length calculation
 Turn_angle_rad = deg2rad(5.5); % radians
