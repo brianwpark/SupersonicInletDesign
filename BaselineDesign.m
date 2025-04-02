@@ -4,16 +4,18 @@ M_mol = 29.1;
 M_mol_KG = Mmol/1000; % kg/mol
 R = 8.314; % J/(mol*K)
 R_Specific = R/MmolKG; % J/(kg*K)
-M_inlet_liftoff = 0.55;
 
 Turn_angle = 5.5; % degrees
 
 %Lift off parameters
 T_sea = 288.15; % K
 P_sea = 101325; % Pa
-
-%required parameters
+M_inlet_liftoff = 0.55;
+M_vehicle_liftoff = 0.31;
 m_dot = 63.6; % kg/s
+
+%Baseline Design Parameters
+Turn_angle = 5.5; % degrees
 
 %lift off calculation
 %Area calculation
@@ -32,5 +34,6 @@ H1 = 2.5*S; % m
 %Horiznotal Length calculation
 Turn_angle_rad = deg2rad(5.5); % radians
 L = H1*tan(Turn_angle_rad); % m
+
 %Exit height calculation
 
