@@ -5,8 +5,6 @@ M_mol_KG = Mmol/1000; % kg/mol
 R = 8.314; % J/(mol*K)
 R_Specific = R/MmolKG; % J/(kg*K)
 
-Turn_angle = 5.5; % degrees
-
 %Liftoff conditions
 T_sea = 288.15; % K
 P_sea = 101325; % Pa
@@ -22,3 +20,12 @@ M_vehicle_supersonic = 1.60;
 
 %Baseline Design Parameters
 Turn_angle = 5.5; % degrees
+
+%Detached or Attached Shock
+%https://math.stackexchange.com/questions/4699275/finding-maximum-deflection-angle-for-oblique-shock-waves
+
+if Turn_angle > Max_turn_angle
+    disp('The oblique shock is a Detached Shock')
+else
+    disp('The oblique shock is a Attached Shock')
+end
