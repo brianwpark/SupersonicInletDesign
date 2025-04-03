@@ -1,11 +1,9 @@
 %Design Requirements
 gamma = 1.385;
 M_mol = 29.1;
-M_mol_KG = Mmol/1000; % kg/mol
+M_mol_KG = M_mol/1000; % kg/mol
 R = 8.314; % J/(mol*K)
-R_Specific = R/MmolKG; % J/(kg*K)
-
-Turn_angle = 5.5; % degrees
+R_Specific = R/M_mol_KG; % J/(kg*K)
 
 %Liftoff conditions
 T_sea = 288.15; % K
@@ -28,13 +26,13 @@ Turn_angle = 5.5; % degrees
 %speed of sound calculation
 a_liftoff = sqrt(gamma*R_Specific*T_sea); % m/s
 %Velocity calculation
-V_ = M_inlet_liftoff*a; % m/s
+V_liftoff = M_inlet_entrance_liftoff*a_liftoff; % m/s
 %density calculation
 rho = P_sea/(R_Specific*T_sea); % kg/m^3
 %Area calculation
-A_entrance = m_dot/(rho*v); % m^2
+A_entrance = m_dot/(rho*V_liftoff); % m^2
 %Height and Width calculation
-S = sqrt(A/2.5); % m
+S = sqrt(A_entrance/2.5); % m
 H1 = 2.5*S; % m
 
 %Horiznotal Length calculation
@@ -42,6 +40,7 @@ Turn_angle_rad = deg2rad(5.5); % radians
 L = H1*tan(Turn_angle_rad); % m
 
 %Exit height calculation (currently thinking)
+H2 = 1.0; %dummy value, to be calculated later
 
 %Supersonic inlet calculation
 %Mass flow rate calculation
