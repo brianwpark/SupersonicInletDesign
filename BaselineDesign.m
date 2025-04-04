@@ -59,8 +59,6 @@ m_dot_supersonic = Rho_supersonic*V_Supersonic*A_entrance; % kg/s
 P2_supersonic = (((2*gamma)/(gamma+1))*(M_vehicle_supersonic^2)*(sin(Turn_angle_rad)^2)-((gamma-1)/(gamma+1)))*P_ambient; % Pa
 P0_supersonic = (1+(gamma-1)/2*(M_vehicle_supersonic^2))^(gamma/(gamma-1))*P_ambient; % Pa
 
-
-
 % Create a table with the key parameters
 paramNames = {'Inlet Height (H1)', 'Width (S)', 'Length (L)', 'Exit Height (H2)', ...
               'Stagnation Pressure (P0)', 'Mass Flow Rate'};
