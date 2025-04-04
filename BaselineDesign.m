@@ -24,9 +24,9 @@ Turn_angle = 5.5; % degrees
 %lift off calculation
 %Area calculation
 %speed of sound calculation
-a_liftoff = sqrt(gamma*R_Specific*T_sea); % m/s
+a_entrance_liftoff = sqrt(gamma*R_Specific*T_sea); % m/s
 %Velocity calculation
-V_liftoff = M_inlet_entrance_liftoff*a_liftoff; % m/s
+V_liftoff = M_inlet_entrance_liftoff*a_entrance_liftoff; % m/s
 %density calculation
 rho = P_sea/(R_Specific*T_sea); % kg/m^3
 %Area calculation
@@ -40,7 +40,8 @@ Turn_angle_rad = deg2rad(5.5); % radians
 L = H1*tan(Turn_angle_rad); % m
 
 %Exit height calculation (currently thinking)
-H2 = 1.0; %dummy value, to be calculated later
+T_exit = 1; %dummy
+H2 = 1; %dummy
 
 %Supersonic inlet calculation
 %Mass flow rate calculation
