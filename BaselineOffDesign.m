@@ -35,9 +35,17 @@ d_turn_d_shock = diff(Turn_angle, shock_wave_angle_rad);
 d_turn_d_shock_func = matlabFunction(d_turn_d_shock); % Convert symbolic function to numeric function handle
 Solved_shock_angle = fzero(d_turn_d_shock_func, [0.1, pi/2]);
 Max_turn_angle = atan(2*cot(Solved_shock_angle)*(((M_vehicle_supersonic)^2*sin(Solved_shock_angle)^2-1)/((M_vehicle_supersonic)^2*(gamma+cos(2*Solved_shock_angle)))));
-
 if Turn_angle_actual > Max_turn_angle
     disp('The oblique shock is a Detached Shock')
 else
     disp('The oblique shock is a Attached Shock')
 end
+
+%oblique shock relations
+
+%Shock angle calculation
+Lamda = sqrt((M_vehicle_supersonic-1)^2-3*(1+(gamma-1)/2*(M_vehicle_supersonic^2))*(1+(gamma+1)/2*(M_vehicle_supersonic^2))*(tan(Turn_angle_actual)^2));
+x = (1/(Lamda^3))*((M_vehicle_supersonic^2-1)^3-9*(1+(gamma-1)/2*M_vehicle_supersonic^2)* (1+(gamma-1)/2*M_vehicle_supersonic^2+(gamma+1)/4*M_vehicle_supersonic^4)*(tan(Turn_angle_actual)^2));
+fprintf('Lamda = %f\n', Lamda);
+fprintf('x = %f\n', x);
+% V_1_n = M_vehicle_supersonic*sin()
