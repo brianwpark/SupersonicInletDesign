@@ -46,6 +46,5 @@ end
 %Shock angle calculation
 Lamda = sqrt((M_vehicle_supersonic-1)^2-3*(1+(gamma-1)/2*(M_vehicle_supersonic^2))*(1+(gamma+1)/2*(M_vehicle_supersonic^2))*(tan(Turn_angle_actual)^2));
 x = (1/(Lamda^3))*((M_vehicle_supersonic^2-1)^3-9*(1+(gamma-1)/2*M_vehicle_supersonic^2)* (1+(gamma-1)/2*M_vehicle_supersonic^2+(gamma+1)/4*M_vehicle_supersonic^4)*(tan(Turn_angle_actual)^2));
-fprintf('Lamda = %f\n', Lamda);
-fprintf('x = %f\n', x);
+
 % V_1_n = M_vehicle_supersonic*sin()
