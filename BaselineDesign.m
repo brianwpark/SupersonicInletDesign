@@ -24,9 +24,9 @@ Turn_angle = 5.5; % degrees
 %lift off calculation
 %Area calculation
 %speed of sound calculation
-a_liftoff = sqrt(gamma*R_Specific*T_sea); % m/s
+a_entrance_liftoff = sqrt(gamma*R_Specific*T_sea); % m/s
 %Velocity calculation
-V_liftoff = M_inlet_entrance_liftoff*a_liftoff; % m/s
+V_liftoff = M_inlet_entrance_liftoff*a_entrance_liftoff; % m/s
 %density calculation
 rho = P_sea/(R_Specific*T_sea); % kg/m^3
 %Area calculation
