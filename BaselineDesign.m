@@ -40,7 +40,13 @@ Turn_angle_rad = deg2rad(5.5); % radians
 L = H1*tan(Turn_angle_rad); % m
 
 %Exit height calculation (currently thinking)
-H2 = 1.0; %dummy value, to be calculated later
+T0_exit_liftoff = T_sea*(1+(gamma-1)/2*M_inlet_entrance_liftoff^2); % K
+a_exit_liftoff = sqrt(gamma*R_Specific*T0_exit_liftoff);
+V_exit_liftoff = M_inlet_exit_liftoff*a_exit_liftoff; % m/s
+p0_exit_liftoff = P_sea*(1+(gamma-1)/2*M_inlet_entrance_liftoff^2)^(gamma/(gamma-1)); % Pa
+rho_exit_liftoff = p0_exit_liftoff/(R_Specific*T0_exit_liftoff); % kg/m^3
+A_exit = m_dot/(rho_exit_liftoff*V_exit_liftoff); % m
+H2 = A_exit/S; % m
 
 %Supersonic inlet calculation
 %Mass flow rate calculation
@@ -48,9 +54,12 @@ a_supersonic = sqrt(gamma*R_Specific*T_ambient); % m/s
 V_Supersonic = M_inlet_exit_suprsonic*a_supersonic; % m/s
 Rho_supersonic = P_ambient/(R_Specific*T_ambient); % kg/m^3
 m_dot_supersonic = Rho_supersonic*V_Supersonic*A_entrance; % kg/s
+
 %Stagnation pressure calculation
 P2_supersonic = (((2*gamma)/(gamma+1))*(M_vehicle_supersonic^2)*(sin(Turn_angle_rad)^2)-((gamma-1)/(gamma+1)))*P_ambient; % Pa
 P0_supersonic = (1+(gamma-1)/2*(M_vehicle_supersonic^2))^(gamma/(gamma-1))*P_ambient; % Pa
+
+
 
 % Create a table with the key parameters
 paramNames = {'Inlet Height (H1)', 'Width (S)', 'Length (L)', 'Exit Height (H2)', ...
