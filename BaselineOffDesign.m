@@ -2,8 +2,6 @@
     This code is for calculating stagnation temperature and pressure, fractional stagnation pressure loss, and mass flow rate entering the inlet.
 %}
 
-
-
 %Design Requirements
 gamma = 1.385;
 M_mol = 29.1;
@@ -21,8 +19,8 @@ m_dot = 63.6; % kg/s
 %Supersonic cruise conditions
 P_ambient = 11.6e3; % Pa
 T_ambient = 216e3; % K
-M_inlet_exit_suprsonic = 0.55;
-M_vehicle_supersonic = 1.60;
+% M_inlet_exit_suprsonic = 0.55;
+% M_vehicle_supersonic = 1.60;
 
 %Baseline Design Parameters
 Turn_angle_actual = deg2rad(5.5); % rad
@@ -46,5 +44,9 @@ end
 %Shock angle calculation
 Lamda = sqrt((M_vehicle_supersonic-1)^2-3*(1+(gamma-1)/2*(M_vehicle_supersonic^2))*(1+(gamma+1)/2*(M_vehicle_supersonic^2))*(tan(Turn_angle_actual)^2));
 x = (1/(Lamda^3))*((M_vehicle_supersonic^2-1)^3-9*(1+(gamma-1)/2*M_vehicle_supersonic^2)* (1+(gamma-1)/2*M_vehicle_supersonic^2+(gamma+1)/4*M_vehicle_supersonic^4)*(tan(Turn_angle_actual)^2));
+alpha = 1;
+theta = atan((M_vehicle_supersonic^2-1+2*Lamda*cos((4*pi*alpha+acos(x))/(3)))/(3*(1+(gamma-1)/(2)*M_vehicle_supersonic^2)*tan(Turn_angle_actual)));
 
-% V_1_n = M_vehicle_supersonic*sin()
+% Basic calculation
+M_1_n = M_vehicle_supersonic*sin(theta);
+NormalShockCalc(T_ambient, P_ambient, M_1_n, gamma);
