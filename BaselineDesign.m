@@ -14,7 +14,7 @@ m_dot = 63.6; % kg/s
 
 %Supersonic cruise conditions
 P_ambient = 11.6e3; % Pa
-T_ambient = 216e3; % K
+T_ambient = 216; % K
 M_inlet_exit_suprsonic = 0.55;
 M_vehicle_supersonic = 1.60;
 
