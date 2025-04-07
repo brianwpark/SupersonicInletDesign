@@ -47,7 +47,7 @@ L = H1*tan(Turn_angle_rad); % m
 %Exit height calculation (currently thinking)
 T0_exit_liftoff = T_sea*(1+(gamma-1)/2*M_inlet_entrance_liftoff^2); % K
 a_exit_liftoff = sqrt(gamma*R_Specific*T0_exit_liftoff);
-V_exit_liftoff = M_inlet_exit_liftoff*a_exit_liftoff; % m/s
+V_exit_liftoff = M_vehicle_liftoff*a_exit_liftoff; % m/s
 p0_exit_liftoff = P_sea*(1+(gamma-1)/2*M_inlet_entrance_liftoff^2)^(gamma/(gamma-1)); % Pa
 rho_exit_liftoff = p0_exit_liftoff/(R_Specific*T0_exit_liftoff); % kg/m^3
 A_exit = m_dot_liftoff/(rho_exit_liftoff*V_exit_liftoff); % m
@@ -122,12 +122,12 @@ for i = 1:length(Shock_formation)
         [T_2,P_2,M_2] = NormalShockCalc(T_ambient,P_ambient,rho_ambient,M_1_n,gamma);
     elseif Shock_formation(i) == 1 % Attached Shock
         % 2nd region basic calculation
-        [T_2,P_2,M_2_n] = NormalShockCalc(T_ambient,P_ambient,rho_ambient,M_1_n,gamma);
+        [T_2,P_2,rho_2,M_2_n] = NormalShockCalc(T_ambient,P_ambient,rho_ambient,M_1_n,gamma);
         M_2 = M_2_n/sin(theta-Turn_angle_actual);
     end
 
     %3rd region basic calculation
-    [T_3,P_3,M_3] = NormalShockCalc(T_2,P_2,M_2,gamma);
+    [T_3,P_3,rho_3,M_3] = NormalShockCalc(T_2,P_2,rho_2,M_2,gamma);
         
     %Exit nozzle condition calculation
     T0_3(i) = T_3*(1+(gamma-1)/2*M_3^2);
@@ -138,4 +138,43 @@ for i = 1:length(Shock_formation)
 
     P0_ambient = P_ambient*(1+(gamma-1)/2*M_vehicle_supersonic^2)^(gamma/(gamma-1)); % Pa
     P_loss_fraction(i) = P0_3(i)/P0_ambient; % Pa
+end
+% Combined plot of T0_3 and P0_3
+figure;
+yyaxis left
+plot(M_1, T0_3, 'b-', 'LineWidth', 2);
+ylabel('Stagnation Temperature T0_3 (K)');
+
+yyaxis right
+plot(M_1, P0_3, 'r-', 'LineWidth', 2);
+ylabel('Stagnation Pressure P0_3 (Pa)');
+
+grid on;
+xlabel('Mach Number (M_1)');
+title('Stagnation Temperature and Pressure vs. Mach Number');
+legend('Temperature', 'Pressure', 'Location', 'best');
+
+% Plot M_1 vs Fractional Stagnation Pressure Loss
+figure;
+plot(M_1, P_loss_fraction, 'g-', 'LineWidth', 2);
+grid on;
+xlabel('Mach Number (M_1)');
+ylabel('Fractional Stagnation Pressure Loss (P0_3/P0_{ambient})');
+title('Fractional Stagnation Pressure Loss vs. Mach Number');
+
+% Plot M_1 vs Mass Flow Rate
+figure;
+plot(M_1, m_dot_inlet, 'm-', 'LineWidth', 2);
+grid on;
+xlabel('Mach Number (M_1)');
+ylabel('Mass Flow Rate (kg/s)');
+title('Inlet Mass Flow Rate vs. Mach Number');
+
+function [T_2,P_2,rho_2,M_2] = NormalShockCalc(T_1,P_1,rho_1,M_1,gamma)
+    % This function calculates the properties of a normal shock wave.
+    % Calculating M2, T2, P2, and rho2 from M1, T1, and P1.
+    M_2 = sqrt((M_1^2+2/(gamma-1))/((2*gamma)/(gamma-1)*M_1^2-1));
+    T_2 = T_1*(1+((gamma-1)/2)*M_1^2)/(1+((gamma-1)/2)*M_2^2);
+    P_2 = P_1*(1+gamma*M_1^2)/(1+gamma*M_2^2);
+    rho_2 = (M_1/M_2)*sqrt(T_1/T_2);
 end
