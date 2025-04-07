@@ -81,7 +81,7 @@ disp(designTable);
 % BASELINE OFF DESIGN CALCULATION
 %Detached or Attached Shock
 %https://math.stackexchange.com/questions/4699275/finding-maximum-deflection-angle-for-oblique-shock-waves
-M_1 = 1:0.1:1.8; % M_1 range for plotting
+M_1 = 1:0.05:1.8; % M_1 range for plotting
 for i = 1:length(M_1)
     M_1_values = M_1(i);
 
