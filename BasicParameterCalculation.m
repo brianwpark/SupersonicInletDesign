@@ -40,8 +40,7 @@ S = sqrt(A_entrance/2.5); % m
 H1 = 2.5*S; % m
 
 %Horiznotal Length calculation
-Turn_angle_rad = deg2rad(5.5); % radians
-L = H1*tan(Turn_angle_rad); % m
+L = H1*tan(Turn_angle_actual); % m
 
 
 %Exit height calculation (currently thinking)
@@ -61,7 +60,7 @@ Rho_supersonic = P_ambient/(R_Specific*T_ambient); % kg/m^3
 m_dot_supersonic = Rho_supersonic*V_Supersonic*A_entrance; % kg/s
 
 %Stagnation pressure calculation
-P2_supersonic = (((2*gamma)/(gamma+1))*(M_vehicle_supersonic^2)*(sin(Turn_angle_rad)^2)-((gamma-1)/(gamma+1)))*P_ambient; % Pa
+P2_supersonic = (((2*gamma)/(gamma+1))*(M_vehicle_supersonic^2)*(sin(Turn_angle_actual)^2)-((gamma-1)/(gamma+1)))*P_ambient; % Pa
 P0_supersonic = (1+(gamma-1)/2*(M_vehicle_supersonic^2))^(gamma/(gamma-1))*P_ambient; % Pa
 
 % Create a table with the key parameters
